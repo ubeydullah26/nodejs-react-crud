@@ -96,12 +96,12 @@ const login = async (req, res) => {
       delete user.password;
       const accessToken = jwt.sign(
         { name: user.email, ...user },
-        'ACCESS_SECRET_KEY',
+        process.env.JWT_ACCESS_SECRET,
         { expiresIn: '1w' }
       );
       const refreshToken = jwt.sign(
         { name: user.email, ...user },
-        'REFRESH_SECRET_KEY'
+        process.env.JWT_REFRESH_SECRET
       );
       return res.send({
         ...user,
